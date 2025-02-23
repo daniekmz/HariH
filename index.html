@@ -1,34 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown to Birthday</title>
+    <title>GAATAU</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
+    <div class="custom-cursor"></div>
+    <div class="balloons">
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+        <div class="balloon"></div>
+    </div>
     <div class="container">
-        <h1>Hitung Mundur Hari H 🎉</h1>
-        <div id="countdown">
-            <div>
-                <span id="days"></span>
-                <div class="smalltext">Hari</div>
+        <h1 class="title animate__animated animate__fadeInDown">Hitung Mundur Hari✨</h1>
+        <div id="countdown" class="countdown">
+            <div class="countdown-item animate__animated animate__fadeIn">
+                <span id="days">00</span>
+                <p>Hari</p>
             </div>
-            <div>
-                <span id="hours"></span>
-                <div class="smalltext">Jam</div>
+            <div class="countdown-item animate__animated animate__fadeIn animate__delay-1s">
+                <span id="hours">00</span>
+                <p>Jam</p>
             </div>
-            <div>
-                <span id="minutes"></span>
-                <div class="smalltext">Menit</div>
+            <div class="countdown-item animate__animated animate__fadeIn animate__delay-2s">
+                <span id="minutes">00</span>
+                <p>Menit</p>
             </div>
-            <div>
-                <span id="seconds"></span>
-                <div class="smalltext">Detik</div>
+            <div class="countdown-item animate__animated animate__fadeIn animate__delay-3s">
+                <span id="seconds">00</span>
+                <p>Detik</p>
             </div>
         </div>
     </div>
-    <div class="bubbles"></div>
     <script src="script.js"></script>
 </body>
 </html>

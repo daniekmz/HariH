@@ -1,114 +1,201 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-    overflow: hidden;
-    position: relative;
+    min-height: 100vh;
+    color: white;
 }
 
 .container {
     text-align: center;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px 40px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    z-index: 2;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
-h1 {
+.title {
+    font-size: 3rem;
     margin-bottom: 20px;
-    color: #333;
-    font-size: 2.5em;
+    font-weight: bold;
 }
 
-#countdown {
+.countdown {
     display: flex;
     justify-content: center;
     gap: 20px;
 }
 
-#countdown div {
-    text-align: center;
+.countdown-item {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    width: 120px;
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
-#countdown span {
-    font-size: 2.5em;
+.countdown-item:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.countdown-item span {
+    font-size: 3rem;
     font-weight: bold;
-    color: #ff6f61;
+    display: block;
 }
 
-.smalltext {
-    font-size: 0.8em;
-    color: #666;
+.countdown-item p {
+    font-size: 1.2rem;
+    margin-top: 10px;
 }
 
-/* Bubble Animation */
-.bubbles {
-    position: absolute;
+/* Animasi Balon */
+.balloons {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    pointer-events: none;
     z-index: 1;
 }
 
-.bubbles span {
+.balloon {
     position: absolute;
     bottom: -100px;
-    background: rgba(255, 255, 255, 0.5);
+    width: 50px;
+    height: 70px;
+    background: #ff6384;
     border-radius: 50%;
-    animation: bubble 10s linear infinite;
+    animation: float 6s ease-in infinite;
 }
 
-@keyframes bubble {
+.balloon::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 20px;
+    background: #ff6384;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+
+.balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 50px;
+    background: #333;
+}
+
+/* Animasi mengambang */
+@keyframes float {
     0% {
-        transform: translateY(0);
-        opacity: 0;
-    }
-    50% {
+        transform: translateY(0) rotate(0deg);
         opacity: 1;
     }
     100% {
-        transform: translateY(-100vh);
+        transform: translateY(-100vh) rotate(360deg);
         opacity: 0;
     }
 }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-image: url('1.jpg'); /* Ganti dengan nama file gambar Anda */
-    background-size: cover; /* Menyesuaikan gambar ke ukuran layar */
-    background-position: center; /* Memposisikan gambar di tengah */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    overflow: hidden;
-    position: relative;
+/* Warna dan Posisi Balon */
+.balloon:nth-child(1) {
+    left: 10%;
+    animation-duration: 8s;
+    background: #ff6384;
 }
 
-body::before {
-    content: '';
-    position: absolute;
+.balloon:nth-child(2) {
+    left: 30%;
+    animation-duration: 10s;
+    background: #36a2eb;
+}
+
+.balloon:nth-child(3) {
+    left: 50%;
+    animation-duration: 7s;
+    background: #ffce56;
+}
+
+.balloon:nth-child(4) {
+    left: 70%;
+    animation-duration: 9s;
+    background: #4bc0c0;
+}
+
+.balloon:nth-child(5) {
+    left: 90%;
+    animation-duration: 6s;
+    background: #9966ff;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Overlay hitam semi-transparan */
-    z-index: 1;
+    width: 20px;
+    height: 20px;
+    background-color: #ff6384; /* Warna cursor */
+    border-radius: 50%;
+    pointer-events: none; /* Memastikan cursor tidak mengganggu interaksi */
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+    z-index: 9999; /* Pastikan cursor selalu di atas elemen lain */
 }
 
-.container {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px 40px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    z-index: 2;
+/* Efek saat hover pada elemen tertentu */
+.container:hover ~ .custom-cursor {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 99, 132, 0.5); /* Warna cursor saat hover */
+}
+
+/* Efek saat mengklik */
+.custom-cursor.clicked {
+    width: 30px;
+    height: 30px;
+    background-color: #36a2eb; /* Warna cursor saat klik */
+}
+
+.custom-cursor::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 99, 132, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
 }
