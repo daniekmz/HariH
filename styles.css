@@ -13,6 +13,7 @@ body {
     align-items: center;
     min-height: 100vh;
     color: white;
+    overflow: hidden; /* Mencegah scrollbar muncul karena balon */
 }
 
 .container {
@@ -22,6 +23,8 @@ body {
     border-radius: 20px;
     padding: 40px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 2; /* Pastikan konten di atas balon */
 }
 
 .title {
@@ -60,8 +63,29 @@ body {
     margin-top: 10px;
 }
 
-/* Animasi Balon */
-.balloons {
+/* Tombol Buka Ucapan Ulang Tahun */
+#openBirthdayTab {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #ff6384;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#openBirthdayTab:hover {
+    background-color: #ff4757;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Animasi Awan */
+.clouds {
     position: fixed;
     top: 0;
     left: 0;
@@ -69,133 +93,79 @@ body {
     height: 100%;
     pointer-events: none;
     z-index: 1;
+    overflow: hidden;
 }
 
-.balloon {
+.cloud {
     position: absolute;
-    bottom: -100px;
-    width: 50px;
-    height: 70px;
-    background: #ff6384;
-    border-radius: 50%;
-    animation: float 6s ease-in infinite;
+    background: white;
+    border-radius: 1000px;
+    animation: floatCloud linear infinite;
 }
 
-.balloon::before {
+.cloud::before, .cloud::after {
     content: '';
     position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 10px;
-    height: 20px;
-    background: #ff6384;
-    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    background: white;
+    border-radius: 1000px;
 }
 
-.balloon::after {
-    content: '';
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 2px;
-    height: 50px;
-    background: #333;
+.cloud::before {
+    width: 60%;
+    height: 60%;
+    top: -30%;
+    left: 20%;
 }
 
-/* Animasi mengambang */
-@keyframes float {
+.cloud::after {
+    width: 50%;
+    height: 50%;
+    top: -20%;
+    right: 20%;
+}
+
+/* Animasi mengambang awan */
+@keyframes floatCloud {
     0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
+        transform: translateX(-100%);
     }
     100% {
-        transform: translateY(-100vh) rotate(360deg);
-        opacity: 0;
+        transform: translateX(100%);
     }
 }
 
-/* Warna dan Posisi Balon */
-.balloon:nth-child(1) {
-    left: 10%;
-    animation-duration: 8s;
-    background: #ff6384;
-}
-
-.balloon:nth-child(2) {
-    left: 30%;
-    animation-duration: 10s;
-    background: #36a2eb;
-}
-
-.balloon:nth-child(3) {
-    left: 50%;
-    animation-duration: 7s;
-    background: #ffce56;
-}
-
-.balloon:nth-child(4) {
-    left: 70%;
-    animation-duration: 9s;
-    background: #4bc0c0;
-}
-
-.balloon:nth-child(5) {
-    left: 90%;
-    animation-duration: 6s;
-    background: #9966ff;
-}
-
-/* Custom Cursor */
-.custom-cursor {
+/* Cursor Love */
+.cursor-love {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 20px;
     height: 20px;
-    background-color: #ff6384; /* Warna cursor */
-    border-radius: 50%;
-    pointer-events: none; /* Memastikan cursor tidak mengganggu interaksi */
+    background-color: transparent;
+    pointer-events: none;
+    z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
-    z-index: 9999; /* Pastikan cursor selalu di atas elemen lain */
+    transition: transform 0.1s ease;
 }
 
-/* Efek saat hover pada elemen tertentu */
-.container:hover ~ .custom-cursor {
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 99, 132, 0.5); /* Warna cursor saat hover */
-}
-
-/* Efek saat mengklik */
-.custom-cursor.clicked {
-    width: 30px;
-    height: 30px;
-    background-color: #36a2eb; /* Warna cursor saat klik */
-}
-
-.custom-cursor::after {
-    content: '';
+.cursor-love::before {
+    content: '❤️'; /* Emoji hati */
+    font-size: 24px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    background-color: rgba(255, 99, 132, 0.3);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: pulse 1s infinite;
+    top: 0;
+    left: 0;
+    animation: floatLove 1s ease-in-out infinite;
 }
 
-@keyframes pulse {
+@keyframes floatLove {
     0% {
-        transform: translate(-50%, -50%) scale(1);
+        transform: translateY(0) scale(1);
         opacity: 1;
     }
+    50% {
+        transform: translateY(-10px) scale(1.2);
+        opacity: 0.8;
+    }
     100% {
-        transform: translate(-50%, -50%) scale(2);
-        opacity: 0;
+        transform: translateY(0) scale(1);
+        opacity: 1;
     }
 }

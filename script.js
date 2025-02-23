@@ -1,5 +1,4 @@
-// Tanggal ulang tahun (format: Tahun, Bulan-1, Hari, Jam, Menit, Detik)
-const birthday = new Date(2025, 02, 19, 7, 0, 0); // Contoh: 25 Desember 2023
+const birthday = new Date(2025, 02, 19, 7, 0, 0); // Contoh: 19 maret 2023
 
 function updateCountdown() {
     const now = new Date();
@@ -7,8 +6,10 @@ function updateCountdown() {
 
     if (diff <= 0) {
         clearInterval(interval);
-        // Buka tab baru dengan ucapan selamat ulang tahun
-        window.open("danie.html", "_blank");
+        // Sembunyikan hitung mundur
+        document.getElementById('countdown').classList.add('hidden');
+        // Tampilkan tombol
+        document.getElementById('openBirthdayTab').classList.remove('hidden');
         return;
     }
 
@@ -26,32 +27,53 @@ function updateCountdown() {
 const interval = setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// Fungsi untuk membuat balon
-function createBalloon() {
-    const balloon = document.createElement('div');
-    balloon.classList.add('balloon');
-    balloon.style.left = `${Math.random() * 100}%`; // Posisi horizontal acak
-    balloon.style.animationDuration = `${Math.random() * 6 + 5}s`; // Durasi animasi acak
-    document.querySelector('.balloons').appendChild(balloon);
+// Event listener untuk tombol
+document.getElementById('openBirthdayTab').addEventListener('click', () => {
+    window.open('danie.html', '_blank');
+});
+
+// Fungsi untuk membuat awan
+function createCloud() {
+    const cloud = document.createElement('div');
+    cloud.classList.add('cloud');
+
+    // Ukuran dan posisi acak
+    const size = Math.random() * 200 + 100; // Ukuran awan antara 100px dan 300px
+    cloud.style.width = `${size}px`;
+    cloud.style.height = `${size * 0.6}px`;
+    cloud.style.top = `${Math.random() * 100}%`;
+    cloud.style.left = `${Math.random() * 100}%`;
+
+    // Kecepatan animasi acak
+    const duration = Math.random() * 20 + 10; // Durasi antara 10s dan 30s
+    cloud.style.animationDuration = `${duration}s`;
+
+    document.querySelector('.clouds').appendChild(cloud);
+
+    // Hapus awan setelah animasi selesai
+    cloud.addEventListener('animationend', () => {
+        cloud.remove();
+    });
 }
 
-// Menghasilkan balon setiap 1 detik
-setInterval(createBalloon, 1000);
+// Buat awan setiap 2 detik
+setInterval(createCloud, 10000);
+setInterval(createBalloon, 10000); // Buat balon setiap 500ms
 
-// Ambil elemen custom cursor
-const cursor = document.querySelector('.custom-cursor');
+// Ambil elemen cursor love
+const cursorLove = document.querySelector('.cursor-love');
 
-// Gerakkan cursor sesuai posisi mouse
+// Gerakkan cursor love sesuai posisi mouse
 document.addEventListener('mousemove', (e) => {
-    cursor.style.left = `${e.pageX}px`;
-    cursor.style.top = `${e.pageY}px`;
+    cursorLove.style.left = `${e.pageX}px`;
+    cursorLove.style.top = `${e.pageY}px`;
 });
 
 // Efek saat mengklik
 document.addEventListener('mousedown', () => {
-    cursor.classList.add('clicked');
+    cursorLove.style.transform = 'translate(-50%, -50%) scale(0.8)';
 });
 
 document.addEventListener('mouseup', () => {
-    cursor.classList.remove('clicked');
+    cursorLove.style.transform = 'translate(-50%, -50%) scale(1)';
 });
