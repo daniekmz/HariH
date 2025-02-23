@@ -32,34 +32,6 @@ document.getElementById('openBirthdayTab').addEventListener('click', () => {
     window.open('danie.html', '_blank');
 });
 
-// Fungsi untuk membuat awan
-function createCloud() {
-    const cloud = document.createElement('div');
-    cloud.classList.add('cloud');
-
-    // Ukuran dan posisi acak
-    const size = Math.random() * 200 + 100; // Ukuran awan antara 100px dan 300px
-    cloud.style.width = `${size}px`;
-    cloud.style.height = `${size * 0.6}px`;
-    cloud.style.top = `${Math.random() * 100}%`;
-    cloud.style.left = `${Math.random() * 100}%`;
-
-    // Kecepatan animasi acak
-    const duration = Math.random() * 20 + 10; // Durasi antara 10s dan 30s
-    cloud.style.animationDuration = `${duration}s`;
-
-    document.querySelector('.clouds').appendChild(cloud);
-
-    // Hapus awan setelah animasi selesai
-    cloud.addEventListener('animationend', () => {
-        cloud.remove();
-    });
-}
-
-// Buat awan setiap 2 detik
-setInterval(createCloud, 10000);
-setInterval(createBalloon, 10000); // Buat balon setiap 500ms
-
 // Ambil elemen cursor love
 const cursorLove = document.querySelector('.cursor-love');
 

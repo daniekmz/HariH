@@ -84,56 +84,6 @@ body {
     display: none;
 }
 
-/* Animasi Awan */
-.clouds {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.cloud {
-    position: absolute;
-    background: white;
-    border-radius: 1000px;
-    animation: floatCloud linear infinite;
-}
-
-.cloud::before, .cloud::after {
-    content: '';
-    position: absolute;
-    background: white;
-    border-radius: 1000px;
-}
-
-.cloud::before {
-    width: 60%;
-    height: 60%;
-    top: -30%;
-    left: 20%;
-}
-
-.cloud::after {
-    width: 50%;
-    height: 50%;
-    top: -20%;
-    right: 20%;
-}
-
-/* Animasi mengambang awan */
-@keyframes floatCloud {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
-}
-
 /* Cursor Love */
 .cursor-love {
     position: fixed;
