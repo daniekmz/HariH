@@ -1,4 +1,4 @@
-const birthday = new Date(2025, 02, 19, 7, 0, 0); // Contoh: 19 maret 2023
+const birthday = new Date(2025, 01, 19, 7, 0, 0); // Contoh: 19 maret 2023
 
 function updateCountdown() {
     const now = new Date();
@@ -8,8 +8,12 @@ function updateCountdown() {
         clearInterval(interval);
         // Sembunyikan hitung mundur
         document.getElementById('countdown').classList.add('hidden');
-        // Tampilkan tombol
+        // Tampilkan tombol "Buka Ucapan Ulang Tahun"
         document.getElementById('openBirthdayTab').classList.remove('hidden');
+        // Aktifkan form komentar
+        document.getElementById('name').disabled = false;
+        document.getElementById('comment').disabled = false;
+        document.getElementById('submitButton').disabled = false;
         return;
     }
 
@@ -49,3 +53,68 @@ document.addEventListener('mousedown', () => {
 document.addEventListener('mouseup', () => {
     cursorLove.style.transform = 'translate(-50%, -50%) scale(1)';
 });
+
+// Event listener untuk form komentar
+document.getElementById('commentForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const comment = document.getElementById('comment').value;
+
+    if (name && comment) {
+        addComment(name, comment);
+        document.getElementById('commentForm').reset(); // Reset form
+        showPopup(); // Tampilkan pop-up
+    } else {
+        alert('Nama dan komentar tidak boleh kosong!');
+    }
+});
+
+// Fungsi untuk menambahkan komentar
+function addComment(name, comment) {
+    const commentList = document.getElementById('commentList');
+
+    // Buat elemen komentar baru
+    const commentItem = document.createElement('div');
+    commentItem.classList.add('comment-item');
+    commentItem.innerHTML = `
+        <strong>${name}</strong>
+        <p>${comment}</p>
+    `;
+
+    // Tambahkan komentar ke daftar
+    commentList.appendChild(commentItem);
+
+    // Simpan komentar ke localStorage
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments.push({ name, comment });
+    localStorage.setItem('comments', JSON.stringify(comments));
+}
+
+// Fungsi untuk menampilkan pop-up
+function showPopup() {
+    const popup = document.getElementById('popup');
+    popup.classList.remove('hidden');
+    setTimeout(() => {
+        popup.classList.add('hidden');
+    }, 3000); // Pop-up hilang setelah 3 detik
+}
+
+// Muat komentar saat halaman dimuat
+window.addEventListener('load', loadComments);
+
+// Fungsi untuk memuat komentar dari localStorage
+function loadComments() {
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    const commentList = document.getElementById('commentList');
+
+    comments.forEach(comment => {
+        const commentItem = document.createElement('div');
+        commentItem.classList.add('comment-item');
+        commentItem.innerHTML = `
+            <strong>${comment.name}</strong>
+            <p>${comment.comment}</p>
+        `;
+        commentList.appendChild(commentItem);
+    });
+}
