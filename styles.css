@@ -9,22 +9,32 @@ body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #6a11cb, #2575fc);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     min-height: 100vh;
     color: white;
-    overflow: hidden; /* Mencegah scrollbar muncul karena balon */
+    overflow: hidden;
 }
 
-.container {
+/* Hitung Mundur di Atas */
+.countdown-top {
     text-align: center;
     background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Border tambahan */
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 40px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    position: relative;
-    z-index: 2; /* Pastikan konten di atas balon */
+    margin-top: 20px;
+    width: 90%;
+    max-width: 800px;
+}
+
+/* Wrapper untuk tombol */
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .title {
@@ -65,57 +75,190 @@ body {
 
 /* Tombol Buka Ucapan Ulang Tahun */
 #openBirthdayTab {
-    margin-top: 20px;
-    padding: 10px 20px;
+    padding: 12px 30px; /* Ukuran lebih besar */
     font-size: 1.2rem;
     color: white;
     background-color: #ff6384;
     border: none;
-    border-radius: 10px;
+    border-radius: 25px; /* Sudut lebih melengkung */
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 99, 132, 0.3);
 }
 
 #openBirthdayTab:hover {
     background-color: #ff4757;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
 }
+
 
 .hidden {
     display: none;
 }
 
-/* Cursor Love */
-.cursor-love {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    background-color: transparent;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease;
+/* Menu Komentar di Bawah */
+.comment-section {
+    margin: 40px auto; /* Margin atas dan bawah, serta auto untuk posisi tengah */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 800px;
+    text-align: center; /* Teks di tengah */
 }
 
-.cursor-love::before {
-    content: '🫵🏻'; /* Emoji hati */
-    font-size: 24px;
-    position: absolute;
+.comment-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+#commentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center; /* Form di tengah */
+}
+
+#commentForm input,
+#commentForm textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    width: 80%; /* Lebar input dan textarea */
+    max-width: 500px; /* Batas maksimal lebar */
+}
+
+#commentForm textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#commentForm button {
+    padding: 10px 20px;
+    background-color: #ff6384;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 50%; /* Lebar tombol */
+    max-width: 200px; /* Batas maksimal lebar tombol */
+}
+
+#commentForm button:hover {
+    background-color: #ff4757;
+}
+
+/* Daftar Komentar */
+.comment-list {
+    margin-top: 20px;
+    text-align: left; /* Teks komentar rata kiri */
+}
+
+.comment-item {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.comment-item strong {
+    color: #ff6384;
+}
+
+/* Animasi Awan */
+.clouds {
+    position: fixed;
     top: 0;
     left: 0;
-    animation: floatLove 1s ease-in-out infinite;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
 }
 
-@keyframes floatLove {
+.cloud {
+    position: absolute;
+    background: white;
+    border-radius: 1000px;
+    animation: floatCloud linear infinite;
+}
+
+.cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 1000px;
+}
+
+.cloud::before {
+    width: 60%;
+    height: 60%;
+    top: -30%;
+    left: 20%;
+}
+
+.cloud::after {
+    width: 50%;
+    height: 50%;
+    top: -20%;
+    right: 20%;
+}
+
+@keyframes floatCloud {
     0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: translateY(-10px) scale(1.2);
-        opacity: 0.8;
+        transform: translateX(-100%);
     }
     100% {
-        transform: translateY(0) scale(1);
+        transform: translateX(100%);
+    }
+}
+
+/* Pop-up Ucapan */
+.popup {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.5s ease-out, fadeOut 2.5s 2s ease-out;
+    z-index: 1000;
+}
+
+@keyframes slideUp {
+    from {
+        bottom: -50px;
+        opacity: 0;
+    }
+    to {
+        bottom: 20px;
         opacity: 1;
     }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.hidden {
+    display: none;
 }
