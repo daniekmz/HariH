@@ -1,4 +1,4 @@
-const birthday = new Date(2025, 02, 19, 7, 0, 0); // Contoh: 19 maret 2023
+const birthday = new Date(2025, 01, 19, 7, 0, 0); // Contoh: 19 maret 2023
 
 function updateCountdown() {
     const now = new Date();
@@ -34,24 +34,6 @@ updateCountdown();
 // Event listener untuk tombol
 document.getElementById('openBirthdayTab').addEventListener('click', () => {
     window.open('danie.html', '_blank');
-});
-
-// Ambil elemen cursor love
-const cursorLove = document.querySelector('.cursor-love');
-
-// Gerakkan cursor love sesuai posisi mouse
-document.addEventListener('mousemove', (e) => {
-    cursorLove.style.left = `${e.pageX}px`;
-    cursorLove.style.top = `${e.pageY}px`;
-});
-
-// Efek saat mengklik
-document.addEventListener('mousedown', () => {
-    cursorLove.style.transform = 'translate(-50%, -50%) scale(0.8)';
-});
-
-document.addEventListener('mouseup', () => {
-    cursorLove.style.transform = 'translate(-50%, -50%) scale(1)';
 });
 
 // Event listener untuk form komentar
